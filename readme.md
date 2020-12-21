@@ -1,11 +1,22 @@
-# @taskr/postcss [![npm](https://img.shields.io/npm/v/@taskr/postcss.svg)](https://npmjs.org/package/@taskr/postcss)
+# @@nickkaramoff/taskr-postcss [![npm](https://badgen.net/npm/v/@nickkaramoff/taskr-postcss.svg)](https://npmjs.org/package/@nickkaramoff/taskr-postcss)
 
 > [PostCSS](https://github.com/postcss/postcss) plugin for [Taskr](https://github.com/lukeed/taskr).
+
+> ## Heads up!
+>
+> This is a fork of the official [@taskr/postcss](https://github.com/lukeed/taskr/tree/master/packages/postcss)
+> package with a few differences:
+>
+> - this package uses PostCSS 8 (and not 6)
+> - thus, this package supports Node version 10 and higher (like PostCSS 8 itself)
+>
+> While this can be used as a drop-in replacement for [@taskr/postcss](https://github.com/lukeed/taskr/tree/master/packages/postcss),
+> there is no guarantee that your build won't break. Use with caution!
 
 ## Install
 
 ```
-$ npm install --save-dev @taskr/postcss
+$ npm install --save-dev @nickkaramoff/taskr-postcss
 ```
 
 ## API
@@ -45,7 +56,7 @@ exports.styles = function * (task) {
 
 > Automatically detect & connect to existing PostCSS configurations
 
-If no [`options`](#api) were defined, `@taskr/postcss` will look for existing `.postcssrc`, `postcss.config.js`, and `.postcssrc.js` root-directory files. Similarly, it will honor a `"postcss"` key within your `package.json` file.
+If no [`options`](#api) were defined, `@nickkaramoff/taskr-postcss` will look for existing `.postcssrc`, `postcss.config.js`, and `.postcssrc.js` root-directory files. Similarly, it will honor a `"postcss"` key within your `package.json` file.
 
 * `.postcssrc` -- must be JSON; see [example](/test/fixtures/sub1/.postcssrc)
 * `.postcssrc.js` -- can be JSON or `module.exports` a Function or Object; see [example](/test/fixtures/sub4/.postcssrc.js)
@@ -79,10 +90,12 @@ exports.styles = function * (task) {
 
 ## Support
 
-Any issues or questions can be sent to the [Taskr monorepo](https://github.com/lukeed/taskr/issues/new).
+Any issues or questions about Taskr can be sent to the
+[Taskr monorepo](https://github.com/lukeed/taskr/issues/new).
 
-Please be sure to specify that you are using `@taskr/postcss`.
+Any issues about this package should be sent here.
 
 ## License
 
 MIT © [Luke Edwards](https://lukeed.com)
+MIT © [Nikita Karamov](https://karamoff.dev)

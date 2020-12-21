@@ -2,7 +2,9 @@
   "private": true,
   "postcss": {
     "plugins": {
-      "autoprefixer": {}
+      "autoprefixer": {
+        "overrideBrowserslist": "chrome 20, ie 10"
+      }
     }
   }
 }

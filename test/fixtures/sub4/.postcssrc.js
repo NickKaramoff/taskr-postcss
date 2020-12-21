@@ -1,5 +1,5 @@
 module.exports = {
 	plugins: [
-		require('autoprefixer')
+		require('autoprefixer')({overrideBrowserslist: "chrome 20, ie 10"})
 	]
 };

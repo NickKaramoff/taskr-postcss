@@ -8,7 +8,7 @@ const plugins = [require('../'), require('@taskr/clear')];
 const tmpDir = str => join(__dirname, str);
 const create = tasks => new Taskr({ tasks, plugins });
 
-test('@taskr/postcss', t => {
+test('@nickkaramoff/taskr-postcss', t => {
 	t.plan(2);
 	const taskr = create({
 		*foo(f) {
@@ -19,14 +19,15 @@ test('@taskr/postcss', t => {
 	taskr.start('foo');
 });
 
-test('@taskr/postcss (plugins)', t => {
+test('@nickkaramoff/taskr-postcss (plugins)', t => {
 	t.plan(2);
 	create({
 		*foo(f) {
 			const tmp = tmpDir('tmp-1');
 
 			yield f.source(`${dir}/*.css`).postcss({
-				plugins: [require('autoprefixer')]
+				plugins: [require('autoprefixer')({overrideBrowserslist: "chrome 20, ie 10"})],
+				from: undefined
 			}).target(tmp);
 
 			const arr = yield f.$.expand(`${tmp}/*.*`);
@@ -40,7 +41,7 @@ test('@taskr/postcss (plugins)', t => {
 	}).start('foo');
 });
 
-test('@taskr/postcss (options)', t => {
+test('@nickkaramoff/taskr-postcss (options)', t => {
 	t.plan(4);
 	create({
 		*foo(f) {
@@ -48,8 +49,9 @@ test('@taskr/postcss (options)', t => {
 			const parser = require('postcss-scss');
 
 			yield f.source(`${dir}/*.scss`).postcss({
-				plugins: [ require('autoprefixer') ],
-				options: { parser }
+				plugins: [ require('autoprefixer')({overrideBrowserslist: "chrome 20, ie 10"}) ],
+				options: { parser },
+				from: undefined
 			}).target(tmp);
 
 			const arr = yield f.$.expand(`${tmp}/*.*`);
@@ -65,15 +67,16 @@ test('@taskr/postcss (options)', t => {
 	}).start('foo');
 });
 
-test('@taskr/postcss (postcssrc)', t => {
+test('@nickkaramoff/taskr-postcss (postcssrc)', t => {
 	t.plan(2);
 	const taskr = new Taskr({
 		plugins,
 		cwd: join(dir, 'sub1'),
 		tasks: {
 			*foo(f) {
+				process.chdir(join(dir, 'sub1')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-3');
-				yield f.source(`${dir}/*.css`).postcss().target(tmp);
+				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
 				const arr = yield f.$.expand(`${tmp}/*.*`);
 				t.equal(arr.length, 1, 'write one file to target');
@@ -88,15 +91,16 @@ test('@taskr/postcss (postcssrc)', t => {
 	taskr.start('foo');
 });
 
-test('@taskr/postcss (package.json)', t => {
+test('@nickkaramoff/taskr-postcss (package.json)', t => {
 	t.plan(2);
 	const taskr = new Taskr({
 		plugins,
 		cwd: join(dir, 'sub2'),
 		tasks: {
 			*foo(f) {
+				process.chdir(join(dir, 'sub2')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-4');
-				yield f.source(`${dir}/*.css`).postcss().target(tmp);
+				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
 				const arr = yield f.$.expand(`${tmp}/*.*`);
 				t.equal(arr.length, 1, 'write one file to target');
@@ -111,15 +115,16 @@ test('@taskr/postcss (package.json)', t => {
 	taskr.start('foo');
 });
 
-test('@taskr/postcss (postcss.config.js)', t => {
+test('@nickkaramoff/taskr-postcss (postcss.config.js)', t => {
 	t.plan(2);
 	const taskr = new Taskr({
 		plugins,
 		cwd: join(dir, 'sub3'),
 		tasks: {
 			*foo(f) {
+				process.chdir(join(dir, 'sub3')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-5');
-				yield f.source(`${dir}/*.css`).postcss().target(tmp);
+				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
 				const arr = yield f.$.expand(`${tmp}/*.*`);
 				t.equal(arr.length, 1, 'write one file to target');
@@ -134,15 +139,16 @@ test('@taskr/postcss (postcss.config.js)', t => {
 	taskr.start('foo');
 });
 
-test('@taskr/postcss (.postcssrc.js)', t => {
+test('@nickkaramoff/taskr-postcss (.postcssrc.js)', t => {
 	t.plan(2);
 	const taskr = new Taskr({
 		plugins,
 		cwd: join(dir, 'sub4'),
 		tasks: {
 			*foo(f) {
+				process.chdir(join(dir, 'sub4')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-6');
-				yield f.source(`${dir}/*.css`).postcss().target(tmp);
+				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
 				const arr = yield f.$.expand(`${tmp}/*.*`);
 				t.equal(arr.length, 1, 'write one file to target');
@@ -157,15 +163,16 @@ test('@taskr/postcss (.postcssrc.js)', t => {
 	taskr.start('foo');
 });
 
-test('@taskr/postcss (plugins<Array> + options<String>)', t => {
+test('@nickkaramoff/taskr-postcss (plugins<Object> + options<String>)', t => {
 	t.plan(4);
 	const taskr = new Taskr({
 		plugins,
 		cwd: join(dir, 'sub5'),
 		tasks: {
 			*foo(f) {
+				process.chdir(join(dir, 'sub5')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-7');
-				yield f.source(`${dir}/*.scss`).postcss().target(tmp);
+				yield f.source(`${dir}/*.scss`).postcss({from: undefined}).target(tmp);
 
 				const arr = yield f.$.expand(`${tmp}/*.*`);
 				t.equal(arr.length, 1, 'write one file to target');
@@ -181,27 +188,3 @@ test('@taskr/postcss (plugins<Array> + options<String>)', t => {
 	});
 	taskr.start('foo');
 });
-
-// test('@taskr/postcss (inline)', t => {
-// 	t.plan(2);
-// 	create({
-// 		*foo(f) {
-// 			const tmp = tmpDir('tmp-3');
-
-// 			yield f.source(`${dir}/*.css`).postcss({
-// 				plugins: [ require('autoprefixer') ],
-// 				options: {
-// 					map: { inline:true }
-// 				}
-// 			}).target(tmp);
-
-// 			const arr = yield f.$.expand(`${tmp}/*.*`);
-// 			t.equal(arr.length, 1, 'write one file to target');
-
-// 			const str = yield f.$.read(`${tmp}/foo.css`, 'utf8');
-// 			t.true(/sourceMappingURL=data:application/.test(str), 'appends inline sourcemap');
-
-// 			yield f.clear(tmp);
-// 		}
-// 	}).start('foo');
-// });

@@ -1,5 +1,5 @@
-const autoprefixer = require('autoprefixer');
-
 module.exports = conf => ({
-	plugins: conf.plugins.concat(autoprefixer)
+	plugins: [
+		require('autoprefixer')({ "overrideBrowserslist": "chrome 20, ie 10" })
+	],
 });
