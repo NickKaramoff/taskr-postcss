@@ -1,4 +1,4 @@
-# @@nickkaramoff/taskr-postcss [![npm](https://badgen.net/npm/v/@nickkaramoff/taskr-postcss.svg)](https://npmjs.org/package/@nickkaramoff/taskr-postcss)
+# @nickkaramoff/taskr-postcss [![npm](https://badgen.net/npm/v/@nickkaramoff/taskr-postcss.svg)](https://npmjs.org/package/@nickkaramoff/taskr-postcss)
 
 > [PostCSS](https://github.com/postcss/postcss) plugin for [Taskr](https://github.com/lukeed/taskr).
 
