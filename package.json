@@ -1,6 +1,6 @@
 {
 	"name": "@nickkaramoff/taskr-postcss",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "PostCSS plugin for Taskr",
 	"repository": "NickKaramoff/taskr-postcss",
 	"license": "MIT",
