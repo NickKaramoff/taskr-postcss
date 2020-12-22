@@ -9,6 +9,7 @@
 >
 > - this package uses PostCSS 8 (and not 6)
 > - thus, this package supports Node version 10 and higher (like PostCSS 8 itself)
+> - it loads the config using PostCSS' own `postcss-load-config`
 >
 > While this can be used as a drop-in replacement for [@taskr/postcss](https://github.com/lukeed/taskr/tree/master/packages/postcss),
 > there is no guarantee that your build won't break. Use with caution!

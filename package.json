@@ -24,12 +24,12 @@
 		"url": "https://karamoff.dev"
 	},
 	"dependencies": {
-		"postcss": "^8.2.1"
+		"postcss": "^8.2.1",
+		"postcss-load-config": "^3.0.0"
 	},
 	"devDependencies": {
 		"@taskr/clear": "^1.1.0",
 		"autoprefixer": "^10.1.0",
-		"postcss-load-config": "^3.0.0",
 		"postcss-scss": "^3.0.4",
 		"tap-spec": "^5.0.0",
 		"tape": "^5.0.1",
