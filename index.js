@@ -11,10 +11,10 @@ module.exports = function (task) {
 	const setError = msg => task.emit('plugin_error', { plugin:'@nickkaramoff/taskr-postcss', error:msg });
 
 	task.plugin('postcss', { every:false }, function * (files, opts) {
-		let config = false;
+		let config;
 
 		try {
-			const { plugins, options } = postcssrc.sync(opts);
+			const { plugins, options } = postcssrc.sync({}, task.root);
 			config = {
 				...options,
 				plugins

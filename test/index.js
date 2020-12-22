@@ -74,7 +74,6 @@ test('@nickkaramoff/taskr-postcss (postcssrc)', t => {
 		cwd: join(dir, 'sub1'),
 		tasks: {
 			*foo(f) {
-				process.chdir(join(dir, 'sub1')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-3');
 				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
@@ -98,7 +97,6 @@ test('@nickkaramoff/taskr-postcss (package.json)', t => {
 		cwd: join(dir, 'sub2'),
 		tasks: {
 			*foo(f) {
-				process.chdir(join(dir, 'sub2')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-4');
 				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
@@ -122,7 +120,6 @@ test('@nickkaramoff/taskr-postcss (postcss.config.js)', t => {
 		cwd: join(dir, 'sub3'),
 		tasks: {
 			*foo(f) {
-				process.chdir(join(dir, 'sub3')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-5');
 				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
@@ -146,7 +143,6 @@ test('@nickkaramoff/taskr-postcss (.postcssrc.js)', t => {
 		cwd: join(dir, 'sub4'),
 		tasks: {
 			*foo(f) {
-				process.chdir(join(dir, 'sub4')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-6');
 				yield f.source(`${dir}/*.css`).postcss({from: undefined}).target(tmp);
 
@@ -170,7 +166,6 @@ test('@nickkaramoff/taskr-postcss (plugins<Object> + options<String>)', t => {
 		cwd: join(dir, 'sub5'),
 		tasks: {
 			*foo(f) {
-				process.chdir(join(dir, 'sub5')); // ? temp fix because `cwd` doesn't work
 				const tmp = tmpDir('tmp-7');
 				yield f.source(`${dir}/*.scss`).postcss({from: undefined}).target(tmp);
 
