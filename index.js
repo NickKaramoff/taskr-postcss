@@ -1,23 +1,17 @@
 'use strict';
 
-const res = require('path').resolve;
 const postcss = require('postcss');
 const postcssrc = require('postcss-load-config');
 
 const base = { plugins:[], options:{} };
-const filenames = ['.postcssrc', '.postcssrc.js', 'postcss.config.js', 'package.json'];
 
-const isString = any => typeof any === 'string';
 const isObject = any => !!any && typeof any === 'object' && !Array.isArray(any);
-const isEmptyObj = any => isObject(any) && Object.keys(any).length === 0;
 
-module.exports = function (task, utils) {
-	const rootDir = str => res(task.root, str);
+module.exports = function (task) {
 	const setError = msg => task.emit('plugin_error', { plugin:'@nickkaramoff/taskr-postcss', error:msg });
-	const getConfig = arr => Promise.all(arr.map(utils.find)).then(res => res.filter(Boolean)).then(res => res[0]);
 
 	task.plugin('postcss', { every:false }, function * (files, opts) {
-		let config, isJSON = false;
+		let config = false;
 
 		try {
 			const { plugins, options } = postcssrc.sync(opts);
